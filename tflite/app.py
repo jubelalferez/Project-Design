@@ -3,12 +3,9 @@ import tkinter.messagebox
 from tkinter import Tk
 from db import Database
 import os
+from db import *
 
 
-root: Tk = Tk()
-root.title('JSJ marketing by Group 10')
-#root.iconbitmap(r'logoz.ico')
-root.geometry('560x680+600+3')
 
 # Instanciate database object
 db = Database('jsj.db')
@@ -16,22 +13,44 @@ db = Database('jsj.db')
 
 # **** Functions ****
 
+def addorange():
+    db.insert("ORANGE", "1", "10")
+    populate_list()
+    
+
+def addapple():
+    db.insert("APPLE", "1", "10")
+    populate_list()
+
+def addbanana():
+    db.insert("BANANA", "1", "8")
+    populate_list()
 
 def addtocart():
-    window = Tk()
-    window.geometry("300x300+630+200")
-    window.title('Products')
+    top = Toplevel()
+    top.title("Products")
+    top.geometry("300x300+710+180")
 
-    photo_orange = PhotoImage(file="ui/Orange.png")
-    button_or = Tk.Button(window, image=photo_orange, relief="raised", bd="3")
-    button_or.place(x=40, y=550)
+    #Orange
+    #photo_orange = PhotoImage(file="ui/Orange.png")
+    button_orange = Button(top, text="Orange", relief="raised", bd="3", command=addorange)
+    button_orange.bind("<Button-1>")
+    button_orange.place(x=15, y=15)
 
-    window.mainloop()
+    #Apple
+    button_apple = Button(top, text="Apple", relief="raised", bd="3", command=addapple)
+    button_apple.bind("<Button-1>")
+    button_apple.place(x=80, y=15)
+
+    #Banana
+    button_banana = Button(top, text="Banana", relief="raised", bd="3", command=addbanana)
+    button_banana.bind("<Button-1>")
+    button_banana.place(x=135, y=15)
 
     #tkinter.messagebox.showinfo('JSJ marketing by Group 10', 'An item is added to your Cart :)')
 
 def checkout():
-    tkinter.messagebox.showinfo('JSJ marketing by Group 10',
+    tkinter.messagebox.showinfo('JSJ Marketing by Group 10',
                                 'Make sure to double check your items and thank you for shopping :)')
     question = tkinter.messagebox.askquestion('Warning', 'Are sure to print the item?')
     if question == 'yes':
@@ -64,6 +83,9 @@ def remove_item():
     db.remove(selected_item[0])
     populate_list()
 
+#Main Window
+root = Tk()
+root.title('JSJ Marketing by Group 10')
 
 # **** Calling an image from the project file ****
 # **** The simplest form, using PhotoImage() class ****
@@ -117,6 +139,9 @@ scrollbar.configure(command=parts_list.yview)
 # Bind select
 parts_list.bind('<<ListboxSelect>>', select_item)
 
+
 populate_list()
 
+
+root.geometry('560x680+600+3')
 root.mainloop()
