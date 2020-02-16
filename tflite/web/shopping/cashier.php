@@ -181,7 +181,7 @@ color:black;
                <td> <?php echo $row['weight']; ?></td>
                <td>
                     <a class="edit" href = "cashier.php?edit=<?php echo $row['id']?>"
-                            class = "btn- btn-info"><img src="crudedit.png" /></a>
+                            class = "btn- btn-info"><img src="icons/edit.png" width="30" height="30" /></a>
                        
                         
                </td>

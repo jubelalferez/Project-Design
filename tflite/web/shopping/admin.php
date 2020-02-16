@@ -181,9 +181,9 @@ color:black;
                <td> <?php echo $row['weight']; ?></td>
                <td>
                     <a class="edit" href = "admin.php?edit=<?php echo $row['id']?>"
-                            class = "btn- btn-info"><img src="crudedit.png" /></a>
+                            class = "btn- btn-info"><img src="icons/edit.png" width="25" height="25" /></a>
                     <a class="delete"  href = "admin.php?delete=<?php echo $row['id']?>"
-                            class = "btn- btn-danger"><img src="cruddelete.png" /></a>       
+                            class = "btn- btn-danger"><img src="icons/delete.png" width="25" height="25" /></a>       
                         
                </td>
             </tr>
