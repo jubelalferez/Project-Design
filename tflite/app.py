@@ -14,22 +14,22 @@ db = Database('jsj.db')
 # **** Functions ****
 
 def addorange():
-    db.insert("ORANGE", "1", "10")
+    db.insert("ORANGE", "1", "10", "140")
     populate_list()
     
 
 def addapple():
-    db.insert("APPLE", "1", "10")
+    db.insert("APPLE", "1", "10", "180")
     populate_list()
 
 def addbanana():
-    db.insert("BANANA", "1", "8")
+    db.insert("BANANA", "1", "8", "120")
     populate_list()
 
 def addtocart():
     top = Toplevel()
     top.title("Products")
-    top.geometry("300x300+710+180")
+    top.geometry("300x300+730+280")
 
     #Orange
     #photo_orange = PhotoImage(file="ui/Orange.png")
@@ -73,9 +73,10 @@ def select_item(event):
         selected_item = parts_list.get(index)
         print(selected_item)
 
-        part_entry.delete(0, END)
-        customer_entry.delete(0, END)
-        total_entry.delete(0, END)
+        item_entry.delete(0, END)
+        quantity_entry.delete(0, END)
+        price_entry.delete(0, END)
+        weight_entry.delete(0, END)
     except IndexError:
         pass
 
@@ -111,20 +112,25 @@ button_3.bind("<Button-1>", checkout)
 button_3.place(x=420, y=550)
 
 """TEXTS"""
-part_text = StringVar()
-itemlabel = Label(root, text='ITEM DESCRIPTION')
+item_text = StringVar()
+itemlabel = Label(root, text='ITEM')
 itemlabel.place(x=40, y=120)
-part_entry = Entry(root, textvariable=part_text)
+item_entry = Entry(root, textvariable=item_text)
 
-customer_text = StringVar()
+quantity_text = StringVar()
 quantitylabel = Label(root, text='QUANTITY')
-quantitylabel.place(x=230, y=120)
-customer_entry = Entry(root, textvariable=customer_text)
+quantitylabel.place(x=170, y=120)
+quantity_entry = Entry(root, textvariable=quantity_text)
 
-total_text = StringVar()
-pricelabel = Label(root, text='UNIT PRICE')
-pricelabel.place(x=445, y=120)
-total_entry = Entry(root, textvariable=total_text)
+price_text = StringVar()
+pricelabel = Label(root, text='PRICE')
+pricelabel.place(x=300, y=120)
+price_entry = Entry(root, textvariable=price_text)
+
+weight_text = StringVar()
+weightlabel = Label(root, text='WEIGHT')
+weightlabel.place(x=400, y=120)
+weight_entry = Entry(root, textvariable=weight_text)
 
 # Parts List (Listbox)
 parts_list = Listbox(root, relief="raised", height=20, width=78, border=0)
