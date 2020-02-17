@@ -109,16 +109,16 @@ color:black;
 
                        <ul class="navbar-nav">
            <li class="nav-item">
-            <p class=" username nav-link"><?php echo $_SESSION['username'];
+            <a href="cashier.php" class=" username nav-link"><?php echo $_SESSION['username'];
             ?>
             
-            </p>
+</a>
           </li>
           <li class="nav-item" style="border-right: 0.1rem solid lightgrey">
             
           </li>
           <li class="nav-item logout">
-            <a class="nav-link btn nav-register-btn" href="cashierlogin.php">Logout</a>
+            <a class="nav-link btn nav-register-btn" href="home.php">Logout</a>
           </li>
 
       

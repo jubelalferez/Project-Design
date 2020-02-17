@@ -16,8 +16,17 @@
 
 </head>
 <body>
-	<div class="header">
-		<h2>Cashierr egister</h2>
+<div class="header">
+    <a href="home.php" id="home">JSJ Marketing Inventory</a>
+    </div>
+
+	<div class="container">
+        <div class="logintext">
+        </div>
+        <div class="flexcenter">
+	<div class="headerr">
+		<br><img src="icons/cashier.png" width="80" height="70">
+		<h2>Cashier Register</h2>
 	</div>
 	
 	<form method="post" action="cashierregister.php">
@@ -37,12 +46,67 @@
 			<label>Confirm password</label>
 			<input type="password" name="password_2">
 		</div>
-		<div class="input-group">
+		<br><div class="input-group">
 			<button type="submit" class="btn" name="reg_user">Register</button>
 		</div>
 		<p>
-			Already a member? <a href="cashierlogin.php">Sign in</a>
+			<br>Already a member? <a href="cashierlogin.php">Sign in</a>
 		</p>
 	</form>
 </body>
+<style>
+	
+	.flexcenter{
+        display: flex;
+        justify-content: space-around;
+    }
+    .logintext{
+        display: flex;
+        background: yellowgreen;
+        justify-content: center;
+        font-family: Roboto;
+    }
+
+    .container {
+        flex-direction: column;
+        border: 3px solid yellowgreen;
+        width: 30%;
+        margin: 0 auto;
+        height: 45%;
+    }
+    .header {
+        display: flex;
+        flex-direction: column;
+        font-size: 30;
+        background: yellowgreen;
+        width: 50%;
+		height: 50px;
+        margin: 0 auto;
+        align-items: center;
+        margin-bottom: 50px;
+        font-family: Roboto;
+		text-align: center;
+		color:red;
+    }
+    #signup {
+        font-family: Roboto;
+        font-size: 20;
+        color: teal;
+    }
+    #signup:hover {
+        font-family: Roboto;
+        font-size: 20;
+        color: blue;
+	}
+	#home {
+		color: black;
+	}
+    .btn {
+		border-radius: 12px;
+		padding: 5px;
+		background-color: #04e300;
+		color: black;
+	}
+	
+</style>
 </html>

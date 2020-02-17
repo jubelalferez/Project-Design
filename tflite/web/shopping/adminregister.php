@@ -12,12 +12,21 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="style2.css">
-	<title>Registration system PHP and MySQL</title>
+	<title>Admin Register</title>
 
 </head>
 <body>
 	<div class="header">
-		<h2>LoginRegister</h2>
+    <a href="home.php" id="home">JSJ Marketing Inventory</a>
+    </div>
+
+	<div class="container">
+        <div class="logintext">
+        </div>
+        <div class="flexcenter">
+	<div class="headerr">
+		<br><img src="icons/admin.png" width="80" height="70">
+		<h2>Admin Register</h2>
 	</div>
 	
 	<form method="post" action="adminregister.php">
@@ -36,13 +45,67 @@
 		<div class="input-group">
 			<label>Confirm password</label>
 			<input type="password" name="password_2">
-		</div>
+		</div><br>
 		<div class="input-group">
 			<button type="submit" class="btn" name="reg_user">Register</button>
 		</div>
 		<p>
-			Already a member? <a href="adminlogin.php">Sign in</a>
+			<br>Already a member? <a href="adminlogin.php">Sign in</a>
 		</p>
 	</form>
 </body>
+<style> 
+	.flexcenter{
+        display: flex;
+        justify-content: space-around;
+    }
+    .logintext{
+        display: flex;
+        background: yellowgreen;
+        justify-content: center;
+        font-family: Roboto;
+    }
+
+    .container {
+        flex-direction: column;
+        border: 3px solid yellowgreen;
+        width: 30%;
+        margin: 0 auto;
+        height: 45%;
+    }
+    .header {
+        display: flex;
+        flex-direction: column;
+        font-size: 30;
+        background: yellowgreen;
+        width: 50%;
+		height: 50px;
+        margin: 0 auto;
+        align-items: center;
+        margin-bottom: 50px;
+        font-family: Roboto;
+		text-align: center;
+		color:red;
+    }
+    #signup {
+        font-family: Roboto;
+        font-size: 20;
+        color: teal;
+    }
+    #signup:hover {
+        font-family: Roboto;
+        font-size: 20;
+        color: blue;
+	}
+	#home {
+		color: black;
+	}
+    .btn {
+		border-radius: 12px;
+		padding: 5px;
+		background-color: #04e300;
+		color: black;
+	}
+
+</style>
 </html>

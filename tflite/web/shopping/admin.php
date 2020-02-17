@@ -118,7 +118,7 @@ color:black;
             
           </li>
           <li class="nav-item logout">
-            <a class="nav-link btn nav-register-btn" href="adminlogin.php">Logout</a>
+            <a class="nav-link btn nav-register-btn" href="home.php">Logout</a>
           </li>
 
       
@@ -166,7 +166,7 @@ color:black;
                        <tr>
                            <th>Item</th>         
                            <th>Quantity</th> 
-                           <th>Price</th>
+                           <th>Price(₱)</th>
                            <th>Weight(g)</th>
                            <th colspan ="2">Action</th>  
                           
@@ -212,7 +212,7 @@ color:black;
                             </div>
 
                             <div class ="form-group">
-                                <label  >Price</label>
+                                <label  >Price(₱)</label>
                                 <input type ="price" name = "price"  class = "form-control form-control-lg"
                                     value = "<?php echo $price; ?>" >
                             </div>

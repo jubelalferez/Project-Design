@@ -10,14 +10,22 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="style2.css">
-	<title>Login</title>
+    
+	<title>Cashier Login</title>
 	
 <body>
 
-	<div class="header">
-		<h2>CashierLogin</h2>
+<div class="header">
+    <a href="home.php" id="home">JSJ Marketing Inventory</a>
+    </div>
+
+    	<div class="container">
+        <div class="logintext">
+        </div>
+        <div class="flexcenter">
+	<div class="headerr">
+		<br><img src="icons/cashier.png" width="80" height="70">
+		<h2>Cashier Login</h2>
 	</div>
 	
 	<form method="post" action="cashierlogin.php">
@@ -32,17 +40,72 @@
 			<label>Password</label>
 			<input type="password" name="password">
 		</div>
-		<div class="input-group">
+		<br><div class="input-group">
 			<button type="submit" class="btn" name="login_user">Login</button>
 		</div>
 		<p>
-			Not yet a member? <a href="cashierregister.php">Sign up</a>
+			<br>Not yet a member? <a href="cashierregister.php">Sign up</a>
 		</p>
 	</form>
 
 	
 
 </body>
+<style>
+	
+	.flexcenter{
+        display: flex;
+        justify-content: space-around;
+    }
+    .logintext{
+        display: flex;
+        background: yellowgreen;
+        justify-content: center;
+        font-family: Roboto;
+    }
+
+    .container {
+        flex-direction: column;
+        border: 3px solid yellowgreen;
+        width: 30%;
+        margin: 0 auto;
+        height: 45%;
+    }
+    .header {
+        display: flex;
+        flex-direction: column;
+        font-size: 30;
+        background: yellowgreen;
+        width: 50%;
+		height: 50px;
+        margin: 0 auto;
+        align-items: center;
+        margin-bottom: 50px;
+        font-family: Roboto;
+		text-align: center;
+		color:red;
+    }
+    #signup {
+        font-family: Roboto;
+        font-size: 20;
+        color: teal;
+    }
+    #signup:hover {
+        font-family: Roboto;
+        font-size: 20;
+        color: blue;
+	}
+	#home {
+		color: black;
+	}
+    .btn {
+		border-radius: 12px;
+		padding: 5px;
+		background-color: #04e300;
+		color: black;
+	}
+	
+</style>
 </html>
 
 
