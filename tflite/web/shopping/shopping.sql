@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 15, 2020 at 10:28 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.1
+-- Generation Time: Feb 17, 2020 at 07:12 AM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -81,7 +81,11 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `item`, `quantity`, `price`, `weight`) VALUES
 (2, 'apple', '3', '10', '190'),
-(4, 'orange', '7', '10', '140');
+(4, 'orange', '7', '10', '140'),
+(5, 'banana', '6', '8', '120'),
+(6, 'skyflakes', '0', '6', '50'),
+(7, 'mango', '0', '12', '200'),
+(8, 'piattos', '0', '14', '80');
 
 --
 -- Indexes for dumped tables
@@ -125,7 +129,7 @@ ALTER TABLE `cashier`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
