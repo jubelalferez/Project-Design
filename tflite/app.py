@@ -5,7 +5,9 @@ from db import Database
 import os
 from db import *
 
-
+db.reset_orange()
+db.reset_apple()
+db.reset_banana()
 
 # Instanciate database object
 db = Database('jsj.db')
@@ -14,17 +16,22 @@ db = Database('jsj.db')
 # **** Functions ****
 
 def addorange():
-    db.insert("ORANGE", "1", "10", "140")
+    db.updateorange()
     populate_list()
-    
+    populate_totalp()
+    populate_totalw()
 
 def addapple():
-    db.insert("APPLE", "1", "10", "180")
+    db.updateapple()
     populate_list()
+    populate_totalp()
+    populate_totalw()
 
 def addbanana():
-    db.insert("BANANA", "1", "8", "120")
+    db.updatebanana()
     populate_list()
+    populate_totalp()
+    populate_totalw()
 
 def addtocart():
     top = Toplevel()
@@ -52,11 +59,15 @@ def addtocart():
 def checkout():
     tkinter.messagebox.showinfo('JSJ Marketing by Group 10',
                                 'Make sure to double check your items and thank you for shopping :)')
-    question = tkinter.messagebox.askquestion('Warning', 'Are sure to print the item?')
+    question = tkinter.messagebox.askquestion('Warning', 'Are sure you want to checkout?')
     if question == 'yes':
         os.system("sudo chmod a+w /dev/usb/lp0")
         os.system("sudo echo -e 'Thank you for shopping \n\n' > /dev/usb/lp0")
         print('Thank you for shopping')
+        db.reset_orange()
+        db.reset_apple()
+        db.reset_banana()
+        populate_list()
     if question == 'no':
         print('Enjoy shopping')
 
@@ -65,6 +76,15 @@ def populate_list():
     for row in db.fetch():
             parts_list.insert(END, row)
 
+def populate_totalp():
+    displaytotalp.delete(0, END)
+    for roww in db.display_price():
+            displaytotalp.insert(END, roww)
+
+def populate_totalw():
+    displaytotalw.delete(0, END)
+    for rowww in db.display_weight():
+            displaytotalw.insert(END, rowww)
 
 def select_item(event):
     try:
@@ -83,6 +103,20 @@ def select_item(event):
 def remove_item():
     db.remove(selected_item[0])
     populate_list()
+
+def resetbox():
+    tkinter.messagebox.showinfo('JSJ Marketing by Group 10',
+                                'Make sure to double check your items')
+    question = tkinter.messagebox.askquestion('Warning', 'Are sure you want to reset all items?')
+    if question == 'yes':
+        db.reset_orange()
+        db.reset_apple()
+        db.reset_banana()
+        populate_list()
+    if question == 'no':
+        print('Enjoy shopping')
+    populate_list()
+    
 
 #Main Window
 root = Tk()
@@ -111,34 +145,61 @@ button_3 = Button(root, image=photoprint, relief="raised", bd="3", command=check
 button_3.bind("<Button-1>", checkout)
 button_3.place(x=420, y=550)
 
+photores = PhotoImage(file="ui/reset.png")
+button_4 = Button(root, image=photores, relief="raised", bd="3", command=resetbox)
+button_4.bind("<Button-1>")
+button_4.place(x=310, y=550)
+
 """TEXTS"""
 item_text = StringVar()
 itemlabel = Label(root, text='ITEM')
-itemlabel.place(x=40, y=120)
+itemlabel.place(x=120, y=120)
 item_entry = Entry(root, textvariable=item_text)
 
 quantity_text = StringVar()
-quantitylabel = Label(root, text='QUANTITY')
-quantitylabel.place(x=170, y=120)
+quantitylabel = Label(root, text='QTY')
+quantitylabel.place(x=200, y=120)
 quantity_entry = Entry(root, textvariable=quantity_text)
 
 price_text = StringVar()
-pricelabel = Label(root, text='PRICE')
-pricelabel.place(x=300, y=120)
+pricelabel = Label(root, text='PRICE(₱)')
+pricelabel.place(x=230, y=120)
 price_entry = Entry(root, textvariable=price_text)
 
 weight_text = StringVar()
-weightlabel = Label(root, text='WEIGHT')
-weightlabel.place(x=400, y=120)
+weightlabel = Label(root, text='WEIGHT(g)')
+weightlabel.place(x=310, y=120)
 weight_entry = Entry(root, textvariable=weight_text)
 
 # Parts List (Listbox)
-parts_list = Listbox(root, relief="raised", height=20, width=78, border=0)
+parts_list = Listbox(root, relief="raised", height=5, width=22, border=0, font = ('Roboto',30))
 parts_list.grid(padx=40, pady=138, columnspan=3, rowspan=6)  #columnspan=3, rowspan=6, pady=10, padx=20)
 parts_list.bind('<<ListboxSelect>>', select_item)
+
+# Parts List (Listbox)
+displaytotalp = Listbox(root, relief="raised", height=1, width=22, border=0, font = ('Roboto',12))
+displaytotalp.place(x=280, y=420)
+displaytotalp.bind('<<ListboxSelect>>', select_item)
+
+totalprice = StringVar()
+totalpricelabel = Label(root, text='Total Price(₱)', font = ('Roboto',12))
+totalpricelabel.place(x=150, y=420)
+totalprice_entry = Entry(root, textvariable=totalprice)
+
+# Parts List (Listbox)
+displaytotalw = Listbox(root, relief="raised", height=1, width=22, border=0, font = ('Roboto',12))
+displaytotalw.place(x=280, y=440)
+displaytotalw.bind('<<ListboxSelect>>', select_item)
+
+totalweight = StringVar()
+totalweightlabel = Label(root, text='Total Weight(g)', font = ('Roboto',12))
+totalweightlabel.place(x=150, y=440)
+totalweight_entry = Entry(root, textvariable=totalweight)
+
 # Create scrollbar
 scrollbar = Scrollbar(root, width=20, border=0)
 scrollbar.place(x=509, y=280, anchor=W)
+
 # Set scroll to listbox
 parts_list.configure(yscrollcommand=scrollbar.set)
 scrollbar.configure(command=parts_list.yview)
@@ -147,6 +208,8 @@ parts_list.bind('<<ListboxSelect>>', select_item)
 
 
 populate_list()
+populate_totalp()
+populate_totalw()
 
 
 root.geometry('560x680+600+3')
