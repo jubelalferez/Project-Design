@@ -61,6 +61,21 @@ class Database:
         tweight= self.cur.fetchall()
         return tweight 
 
+    def fetch_orange(self):
+        self.cur.execute("SELECT * FROM parts where id = 1 AND quantity > 0")
+        forange= self.cur.fetchall()
+        return forange
+
+    def fetch_apple(self):
+        self.cur.execute("SELECT * FROM parts where id = 2 AND quantity > 0")
+        fapple= self.cur.fetchall()
+        return fapple
+
+    def fetch_banana(self):
+        self.cur.execute("SELECT * FROM parts where id = 3 AND quantity > 0")
+        fbanana= self.cur.fetchall()
+        return fbanana
+
     def __del__(self):
         self.conn.close()
 

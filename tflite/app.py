@@ -4,6 +4,7 @@ from tkinter import Tk
 from db import Database
 import os
 from db import *
+import functools
 
 db.reset_orange()
 db.reset_apple()
@@ -40,21 +41,22 @@ def addtocart():
 
     #Orange
     #photo_orange = PhotoImage(file="ui/Orange.png")
-    button_orange = Button(top, text="Orange", relief="raised", bd="3", command=addorange)
+    button_orange = Button(top, text="Orange", relief="raised", bd="3", height=2, width=4, command=addorange)
     button_orange.bind("<Button-1>")
     button_orange.place(x=15, y=15)
 
     #Apple
-    button_apple = Button(top, text="Apple", relief="raised", bd="3", command=addapple)
+    button_apple = Button(top, text="Apple", relief="raised", bd="3", height=2, width=4, command=addapple)
     button_apple.bind("<Button-1>")
-    button_apple.place(x=80, y=15)
+    button_apple.place(x=85, y=15)
 
     #Banana
-    button_banana = Button(top, text="Banana", relief="raised", bd="3", command=addbanana)
+    button_banana = Button(top, text="Banana", relief="raised", bd="3", height=2, width=4, command=addbanana)
     button_banana.bind("<Button-1>")
-    button_banana.place(x=135, y=15)
+    button_banana.place(x=155, y=15)
 
     #tkinter.messagebox.showinfo('JSJ marketing by Group 10', 'An item is added to your Cart :)')
+
 
 def checkout():
     tkinter.messagebox.showinfo('JSJ Marketing by Group 10',
@@ -62,12 +64,40 @@ def checkout():
     question = tkinter.messagebox.askquestion('Warning', 'Are sure you want to checkout?')
     if question == 'yes':
         os.system("sudo chmod a+w /dev/usb/lp0")
-        os.system("sudo echo -e 'Thank you for shopping \n\n' > /dev/usb/lp0")
-        print('Thank you for shopping')
+        populate_list()
+        populate_totalp()
+        populate_totalw()
+
+        pro = db.fetch_orange()
+        proo =  ''.join(str(e) for e in pro)
+
+        pra = db.fetch_apple()
+        praa =  ''.join(str(e) for e in pra)
+
+        prb = db.fetch_banana()
+        prbb =  ''.join(str(e) for e in prb)
+
+        prp = db.display_price()
+        prpp =  ''.join(str(e) for e in prp)
+
+        prw = db.display_weight()
+        prww =  ''.join(str(e) for e in prw)
+
+        os.system("sudo echo -e '    Item Qty Price(P) Weight(g) \n' > /dev/usb/lp0")
+        os.system("sudo echo -e '" +proo+ "' > /dev/usb/lp0")
+        os.system("sudo echo -e '" +praa+ "' > /dev/usb/lp0")
+        os.system("sudo echo -e '" +prbb+ "\n' > /dev/usb/lp0")
+        os.system("sudo echo -e 'Total Price(P)" +prpp+ "' > /dev/usb/lp0")
+        os.system("sudo echo -e 'Total Weight(g)" +prww+ "\n\n' > /dev/usb/lp0")
+        os.system("sudo echo -e 'Thank you for Shopping! \nJSJ Marketing \n\n\n' > /dev/usb/lp0")
+        
+        #print("asd" +pre+ "dsa")
         db.reset_orange()
         db.reset_apple()
         db.reset_banana()
         populate_list()
+        populate_totalp()
+        populate_totalw()
     if question == 'no':
         print('Enjoy shopping')
 
@@ -172,28 +202,28 @@ weightlabel.place(x=310, y=120)
 weight_entry = Entry(root, textvariable=weight_text)
 
 # Parts List (Listbox)
-parts_list = Listbox(root, relief="raised", height=5, width=22, border=0, font = ('Roboto',30))
+parts_list = Listbox(root, relief="raised", height=5, width=20, border=0, font = ('Roboto',30))
 parts_list.grid(padx=40, pady=138, columnspan=3, rowspan=6)  #columnspan=3, rowspan=6, pady=10, padx=20)
 parts_list.bind('<<ListboxSelect>>', select_item)
 
 # Parts List (Listbox)
-displaytotalp = Listbox(root, relief="raised", height=1, width=22, border=0, font = ('Roboto',12))
+displaytotalp = Listbox(root, relief="raised", height=1, width=10, border=0, font = ('Roboto',14))
 displaytotalp.place(x=280, y=420)
 displaytotalp.bind('<<ListboxSelect>>', select_item)
 
 totalprice = StringVar()
-totalpricelabel = Label(root, text='Total Price(₱)', font = ('Roboto',12))
-totalpricelabel.place(x=150, y=420)
+totalpricelabel = Label(root, text='Total Price(₱)', font = ('Roboto',13))
+totalpricelabel.place(x=135, y=420)
 totalprice_entry = Entry(root, textvariable=totalprice)
 
 # Parts List (Listbox)
-displaytotalw = Listbox(root, relief="raised", height=1, width=22, border=0, font = ('Roboto',12))
+displaytotalw = Listbox(root, relief="raised", height=1, width=10, border=0, font = ('Roboto',14))
 displaytotalw.place(x=280, y=440)
 displaytotalw.bind('<<ListboxSelect>>', select_item)
 
 totalweight = StringVar()
-totalweightlabel = Label(root, text='Total Weight(g)', font = ('Roboto',12))
-totalweightlabel.place(x=150, y=440)
+totalweightlabel = Label(root, text='Total Weight(g)', font = ('Roboto',13))
+totalweightlabel.place(x=135, y=440)
 totalweight_entry = Entry(root, textvariable=totalweight)
 
 # Create scrollbar
