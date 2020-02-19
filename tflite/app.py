@@ -6,9 +6,7 @@ import os
 from db import *
 import functools
 
-db.reset_orange()
-db.reset_apple()
-db.reset_banana()
+db.reset_all()
 
 # Instanciate database object
 db = Database('jsj.db')
@@ -92,9 +90,7 @@ def checkout():
         os.system("sudo echo -e 'Thank you for Shopping! \nJSJ Marketing \n\n\n' > /dev/usb/lp0")
         
         #print("asd" +pre+ "dsa")
-        db.reset_orange()
-        db.reset_apple()
-        db.reset_banana()
+        db.reset_all()
         populate_list()
         populate_totalp()
         populate_totalw()
@@ -133,19 +129,21 @@ def select_item(event):
 def remove_item():
     db.remove(selected_item[0])
     populate_list()
+    populate_totalp()
+    populate_totalw()
 
 def resetbox():
     tkinter.messagebox.showinfo('JSJ Marketing by Group 10',
                                 'Make sure to double check your items')
     question = tkinter.messagebox.askquestion('Warning', 'Are sure you want to reset all items?')
     if question == 'yes':
-        db.reset_orange()
-        db.reset_apple()
-        db.reset_banana()
+        db.reset_all()
         populate_list()
+        populate_totalp()
+        populate_totalw()
     if question == 'no':
         print('Enjoy shopping')
-    populate_list()
+    
     
 
 #Main Window

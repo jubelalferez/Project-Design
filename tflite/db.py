@@ -22,19 +22,11 @@ class Database:
         
 
     def remove(self, id):
-        self.cur.execute("UPDATE parts SET quantity = 0 WHERE id=?", (id,))
+        self.cur.execute("UPDATE parts SET quantity = 0, price = 0, weight = 0 WHERE id=?", (id,))
         self.conn.commit()
 
-    def reset_orange(self):
-        self.cur.execute("UPDATE parts SET quantity = 0, price = 0, weight = 0 WHERE id = 1")
-        self.conn.commit()
-
-    def reset_apple(self):
-        self.cur.execute("UPDATE parts SET quantity = 0, price = 0, weight = 0 WHERE id = 2")
-        self.conn.commit()
-
-    def reset_banana(self):
-        self.cur.execute("UPDATE parts SET quantity = 0, price = 0, weight = 0 WHERE id = 3")
+    def reset_all(self):
+        self.cur.execute("UPDATE parts SET quantity = 0, price = 0, weight = 0")
         self.conn.commit()
 
     def updateorange(self):
