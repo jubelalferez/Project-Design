@@ -9,7 +9,7 @@ import functools
 db.reset_all()
 
 # Instanciate database object
-db = Database(r'C:\Users\Jubel\Desktop\tflite\ui\jsj.db')
+db = Database(r'/share/sj.db')
 
 
 # **** Functions ****

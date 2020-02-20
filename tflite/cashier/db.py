@@ -1,7 +1,6 @@
 import sqlite3
 
 
-
 class Database:
     def __init__(self, db):
         self.conn = sqlite3.connect(db)
@@ -72,8 +71,10 @@ class Database:
     def __del__(self):
         self.conn.close()
 
-db = Database(r'C:\Users\Jubel\Desktop\tflite\ui\jsj.db')  
+    
 
+
+db = Database(r'/share/sj.db')
 
 #db.insert("APPLE", "1", "10")
 #db.insert("BANANA", "1", "8")
