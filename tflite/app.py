@@ -9,7 +9,7 @@ import functools
 db.reset_all()
 
 # Instanciate database object
-db = Database('jsj.db')
+db = Database(r'/share/sj.db')
 
 
 # **** Functions ****

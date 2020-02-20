@@ -74,7 +74,7 @@ class Database:
     
 
 
-db = Database('jsj.db')
+db = Database(r'/share/sj.db')
 
 #db.insert("APPLE", "1", "10")
 #db.insert("BANANA", "1", "8")
