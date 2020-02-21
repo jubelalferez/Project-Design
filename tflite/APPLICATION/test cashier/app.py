@@ -8,6 +8,8 @@ import functools
 
 #db.reset_all()
 
+# Instanciate database object
+db = Database(r'C:\Users\Owen\Desktop\db\jsj.db') 
 
 # **** Functions ****
 
@@ -129,8 +131,6 @@ scrollbar.configure(command=parts_list.yview)
 # Bind select
 parts_list.bind('<<ListboxSelect>>', select_item)
 
-# Instanciate database object
-db = Database(r'C:\Users\Jubel\Desktop\db\sj.db') 
 
 root.geometry('560x680+600+3')
 root.mainloop()

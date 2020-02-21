@@ -3,6 +3,10 @@ import sqlite3
 
 
 class Database:
+
+
+
+
     def __init__(self, db):
         self.conn = sqlite3.connect(db)
         self.cur = self.conn.cursor()
@@ -20,6 +24,10 @@ class Database:
                          (item, quantity, price, weight))
         self.conn.commit()
         
+    def addcustomer(self,orange, apple, banana):
+        self.cur.execute("INSERT INTO orders VALUES (NULL, ?, ?, ?)",
+                         (orange, apple, banana))
+        self.conn.commit()
 
     def remove(self, id):
         self.cur.execute("UPDATE parts SET quantity = 0, price = 0, weight = 0 WHERE id=?", (id,))
@@ -30,17 +38,27 @@ class Database:
         self.conn.commit()
 
     def updateorange(self):
-        self.cur.execute("UPDATE parts SET quantity = quantity + 1, price = price + 10, weight = weight + 135 WHERE id = 1")
+        self.cur.execute("UPDATE orders SET orange = orange + 1 WHERE orderid =(SELECT orderid from orders ORDER BY orderid DESC LIMIT 1)")
+        self.cur.execute("UPDATE parts SET quantity = (SELECT orange from orders WHERE orderid = (SELECT orderid from orders ORDER BY orderid DESC LIMIT 1)),\
+        price = 10*(SELECT orange from orders WHERE orderid = (SELECT orderid from orders ORDER BY orderid DESC LIMIT 1)),\
+        weight = 135*(SELECT orange from orders WHERE orderid = (SELECT orderid from orders ORDER BY orderid DESC LIMIT 1))\
+        WHERE id = 1")
         self.conn.commit()
 
     def updateapple(self):
-        self.cur.execute("UPDATE parts SET quantity = quantity + 1, price = price + 10, weight = weight + 145 WHERE id = 2")
-                       
+        self.cur.execute("UPDATE orders SET apple = apple + 1 WHERE orderid =(SELECT orderid from orders ORDER BY orderid DESC LIMIT 1)")
+        self.cur.execute("UPDATE parts SET quantity = (SELECT apple from orders WHERE orderid = (SELECT orderid from orders ORDER BY orderid DESC LIMIT 1)),\
+        price = 10*(SELECT apple from orders WHERE orderid = (SELECT orderid from orders ORDER BY orderid DESC LIMIT 1)),\
+        weight = 145*(SELECT apple from orders WHERE orderid = (SELECT orderid from orders ORDER BY orderid DESC LIMIT 1))\
+        WHERE id = 2")         
         self.conn.commit()
 
     def updatebanana(self):
-        self.cur.execute("UPDATE parts SET quantity = quantity + 1, price = price + 8, weight = weight + 120 WHERE id = 3")
-                       
+        self.cur.execute("UPDATE orders SET banana = banana + 1 WHERE orderid =(SELECT orderid from orders ORDER BY orderid DESC LIMIT 1)")
+        self.cur.execute("UPDATE parts SET quantity = (SELECT banana from orders WHERE orderid = (SELECT orderid from orders ORDER BY orderid DESC LIMIT 1)),\
+        price = 8*(SELECT banana from orders WHERE orderid = (SELECT orderid from orders ORDER BY orderid DESC LIMIT 1)),\
+        weight = 120*(SELECT banana from orders WHERE orderid = (SELECT orderid from orders ORDER BY orderid DESC LIMIT 1))\
+        WHERE id = 3")       
         self.conn.commit()
 
     def display_price(self):
@@ -78,7 +96,7 @@ class Database:
     def __del__(self):
         self.conn.close()
 
-db = Database(r'C:\Users\Jubel\Desktop\db\sj.db')  
+db = Database(r'C:\Users\Owen\Desktop\db\jsj.db')  
 
 
 #db.insert("APPLE", "1", "10")

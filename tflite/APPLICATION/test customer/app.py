@@ -9,12 +9,17 @@ import functools
 db.reset_all()
 
 # Instanciate database object
-db = Database(r'C:\Users\Jubel\Desktop\db\sj.db')
+db = Database(r'C:\Users\Owen\Desktop\db\jsj.db')
+
+
+#Initialize
+db.addcustomer("0", "0" , "0")
 
 
 # **** Functions ****
 
 def addorange():
+
     db.updateorange()
     populate_list()
     populate_totalp()
@@ -59,11 +64,6 @@ def addtocart():
 
     #tkinter.messagebox.showinfo('JSJ marketing by Group 10', 'An item is added to your Cart :)')
 
-def newcust():
-    db.reset_all()
-    populate_list()
-    populate_totalp()
-    populate_totalw()
 
 def checkout():
     tkinter.messagebox.showinfo('JSJ Marketing by Group 10',
@@ -98,7 +98,7 @@ def checkout():
         os.system("sudo echo -e 'Total Weight(g)" +prww+ "\n\n' > /dev/usb/lp0")
         os.system("sudo echo -e 'Thank you for Shopping! \nJSJ Marketing \n\n\n' > /dev/usb/lp0")
         
-        db.upinvent()
+        #db.upinvent()
         #print("asd" +pre+ "dsa")
         #db.reset_all()
         #populate_list()
@@ -154,7 +154,8 @@ def resetbox():
     if question == 'no':
         print('Enjoy shopping')
     
-    
+
+
 
 #Main Window
 root = Tk()
@@ -187,10 +188,6 @@ photores = PhotoImage(file="ui/reset.png")
 button_4 = Button(root, image=photores, relief="raised", bd="3", command=resetbox)
 button_4.bind("<Button-1>")
 button_4.place(x=310, y=550)
-
-button_newcust = Button(root, text="New Customer", relief="raised", bd="3", height=2, width=13, font = ('Roboto',10), command=newcust)
-button_newcust.bind("<Button-1>")
-button_newcust.place(x=20, y=400)
 
 """TEXTS"""
 item_text = StringVar()

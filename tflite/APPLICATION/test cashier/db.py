@@ -29,7 +29,7 @@ class Database:
     def __del__(self):
         self.conn.close()
 
-db = Database(r'C:\Users\Jubel\Desktop\db\sj.db')  
+db = Database(r'C:\Users\Owen\Desktop\db\jsj.db')  
 
 
 #db.insert("APPLE", "1", "10")
