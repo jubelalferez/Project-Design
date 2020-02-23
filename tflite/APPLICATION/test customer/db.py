@@ -1,12 +1,7 @@
 import sqlite3
 
 
-
 class Database:
-
-
-
-
     def __init__(self, db):
         self.conn = sqlite3.connect(db)
         self.cur = self.conn.cursor()
@@ -86,17 +81,23 @@ class Database:
         fbanana= self.cur.fetchall()
         return fbanana
 
+    def fetch_orderid(self):
+        self.cur.execute("SELECT orderid FROM orders ORDER BY orderid DESC LIMIT 1")
+        forderid = self.cur.fetchall()
+        return forderid
+
     def upinvent(self):
-        self.cur.execute("UPDATE parts SET quantityy = quantityy - quantity")
+        self.cur.execute("UPDATE inventory SET quantity = quantity - (SELECT orange FROM orders ORDER BY orderid DESC LIMIT 1) WHERE id = 1")
         self.conn.commit()
-        #self.cur.execute("SELECT quantityy, pricee, weightt FROM parts WHERE quantity > 0")
-        #fbanana= self.cur.fetchall()
-        #return fbanana
+        self.cur.execute("UPDATE inventory SET quantity = quantity - (SELECT apple FROM orders ORDER BY orderid DESC LIMIT 1) WHERE id = 2")
+        self.conn.commit()
+        self.cur.execute("UPDATE inventory SET quantity = quantity - (SELECT banana FROM orders ORDER BY orderid DESC LIMIT 1) WHERE id = 3")
+        self.conn.commit()
 
     def __del__(self):
         self.conn.close()
 
-db = Database(r'C:\Users\Owen\Desktop\db\jsj.db')  
+db = Database(r'C:\Users\Jubel\Desktop\db\jsj.db')  
 
 
 #db.insert("APPLE", "1", "10")

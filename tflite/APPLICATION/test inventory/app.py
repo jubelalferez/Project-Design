@@ -9,7 +9,7 @@ import functools
 #db.reset_all()
 
 # Instanciate database object
-db = Database(r'C:\Users\Owen\Desktop\db\jsj.db')
+db = Database(r'C:\Users\Jubel\Desktop\db\jsj.db')
 
 
 # **** Functions ****

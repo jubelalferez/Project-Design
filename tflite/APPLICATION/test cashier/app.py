@@ -9,7 +9,7 @@ import functools
 #db.reset_all()
 
 # Instanciate database object
-db = Database(r'C:\Users\Owen\Desktop\db\jsj.db') 
+db = Database(r'C:\Users\Jubel\Desktop\db\jsj.db') 
 
 # **** Functions ****
 
@@ -25,9 +25,9 @@ def purorder():
     populate_totalw()
 
 def populate_list():
-    parts_list.delete(0, END)
+    order_list.delete(0, END)
     for row in db.fetch():
-            parts_list.insert(END, row)
+            order_list.insert(END, row)
 
 def populate_totalp():
     displaytotalp.delete(0, END)
@@ -39,11 +39,16 @@ def populate_totalw():
     for rowww in db.display_weight():
             displaytotalw.insert(END, rowww)
 
+def populate_order():
+    order_list.delete(0, END)
+    for rowww_o in db.getordero():
+            order_list.insert(END, rowww_o)
+
 def select_item(event):
     try:
         global selected_item
-        index = parts_list.curselection()[0]
-        selected_item = parts_list.get(index)
+        index = order_list.curselection()[0]
+        selected_item = order_list.get(index)
         print(selected_item)
 
         item_entry.delete(0, END)
@@ -53,6 +58,10 @@ def select_item(event):
     except IndexError:
         pass
     
+def searchorder():
+    db.getordero()
+    populate_order()
+
 
 #Main Window
 root = Tk()
@@ -76,6 +85,18 @@ newcustlabel = Label(root, text='NEW CUSTOMER', font = ('Roboto',13))
 newcustlabel.place(x=50, y=525)
 
 """TEXTS"""
+
+orderid_label = Label(root, text='Order ID: ', font=('Roboto', 14))
+orderid_label.grid(row=0, column=0, sticky=W)
+orderid_label.place(x=220, y=60)
+orderid_entry = Entry(root)
+orderid_entry.grid(row=1, column=2)
+orderid_entry.place(x=300, y=66)
+
+searchorder_btn = Button(root, text='Search', width=12, command=searchorder)
+searchorder_btn.grid(row=2, column=2)
+searchorder_btn.place(x=430, y=63)
+
 item_text = StringVar()
 itemlabel = Label(root, text='ITEM')
 itemlabel.place(x=120, y=120)
@@ -97,9 +118,9 @@ weightlabel.place(x=310, y=120)
 weight_entry = Entry(root, textvariable=weight_text)
 
 # Parts List (Listbox)
-parts_list = Listbox(root, relief="raised", height=5, width=20, border=0, font = ('Roboto',30))
-parts_list.grid(padx=40, pady=138, columnspan=3, rowspan=6)  #columnspan=3, rowspan=6, pady=10, padx=20)
-parts_list.bind('<<ListboxSelect>>', select_item)
+order_list = Listbox(root, relief="raised", height=5, width=20, border=0, font = ('Roboto',30))
+order_list.grid(padx=40, pady=138, columnspan=3, rowspan=6)  #columnspan=3, rowspan=6, pady=10, padx=20)
+order_list.bind('<<ListboxSelect>>', select_item)
 
 # Parts List (Listbox)
 displaytotalp = Listbox(root, relief="raised", height=1, width=10, border=0, font = ('Roboto',14))
@@ -108,17 +129,17 @@ displaytotalp.bind('<<ListboxSelect>>', select_item)
 
 totalprice = StringVar()
 totalpricelabel = Label(root, text='Total Price(₱)', font = ('Roboto',13))
-totalpricelabel.place(x=135, y=420)
+totalpricelabel.place(x=145, y=420)
 totalprice_entry = Entry(root, textvariable=totalprice)
 
 # Parts List (Listbox)
 displaytotalw = Listbox(root, relief="raised", height=1, width=10, border=0, font = ('Roboto',14))
-displaytotalw.place(x=280, y=440)
+displaytotalw.place(x=280, y=445)
 displaytotalw.bind('<<ListboxSelect>>', select_item)
 
 totalweight = StringVar()
 totalweightlabel = Label(root, text='Total Weight(g)', font = ('Roboto',13))
-totalweightlabel.place(x=135, y=440)
+totalweightlabel.place(x=145, y=445)
 totalweight_entry = Entry(root, textvariable=totalweight)
 
 # Create scrollbar
@@ -126,10 +147,10 @@ scrollbar = Scrollbar(root, width=20, border=0)
 scrollbar.place(x=509, y=280, anchor=W)
 
 # Set scroll to listbox
-parts_list.configure(yscrollcommand=scrollbar.set)
-scrollbar.configure(command=parts_list.yview)
+order_list.configure(yscrollcommand=scrollbar.set)
+scrollbar.configure(command=order_list.yview)
 # Bind select
-parts_list.bind('<<ListboxSelect>>', select_item)
+order_list.bind('<<ListboxSelect>>', select_item)
 
 
 root.geometry('560x680+600+3')

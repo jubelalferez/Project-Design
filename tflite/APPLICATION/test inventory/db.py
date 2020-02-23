@@ -7,11 +7,11 @@ class Database:
         self.conn.commit()
 
     def fetch(self):
-        self.cur.execute("SELECT id, item, quantityy, pricee, weightt FROM parts")
+        self.cur.execute("SELECT id, item, quantity, price, weight FROM inventory")
         rows = self.cur.fetchall()
         return rows     
 
     def __del__(self):
         self.conn.close()
 
-db = Database(r'C:\Users\Owen\Desktop\db\jsj.db')
+db = Database(r'C:\Users\Jubel\Desktop\db\jsj.db')

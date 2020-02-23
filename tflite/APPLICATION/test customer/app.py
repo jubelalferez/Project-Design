@@ -9,7 +9,7 @@ import functools
 db.reset_all()
 
 # Instanciate database object
-db = Database(r'C:\Users\Owen\Desktop\db\jsj.db')
+db = Database(r'C:\Users\Jubel\Desktop\db\jsj.db')
 
 
 #Initialize
@@ -64,6 +64,13 @@ def addtocart():
 
     #tkinter.messagebox.showinfo('JSJ marketing by Group 10', 'An item is added to your Cart :)')
 
+def newcust():
+    db.addcustomer("0", "0" , "0")
+    db.reset_all()
+    populate_list()
+    populate_totalp()
+    populate_totalw()
+
 
 def checkout():
     tkinter.messagebox.showinfo('JSJ Marketing by Group 10',
@@ -90,15 +97,20 @@ def checkout():
         prw = db.display_weight()
         prww =  ''.join(str(e) for e in prw)
 
+        proi = db.fetch_orderid()
+        proid =  ''.join(str(e) for e in proi)
+
         os.system("sudo echo -e '    Item Qty Price(P) Weight(g) \n' > /dev/usb/lp0")
         os.system("sudo echo -e '" +proo+ "' > /dev/usb/lp0")
         os.system("sudo echo -e '" +praa+ "' > /dev/usb/lp0")
         os.system("sudo echo -e '" +prbb+ "\n' > /dev/usb/lp0")
         os.system("sudo echo -e 'Total Price(P)" +prpp+ "' > /dev/usb/lp0")
         os.system("sudo echo -e 'Total Weight(g)" +prww+ "\n\n' > /dev/usb/lp0")
+        os.system("sudo echo -e 'Order ID: " +proid+ "\n' > /dev/usb/lp0")
         os.system("sudo echo -e 'Thank you for Shopping! \nJSJ Marketing \n\n\n' > /dev/usb/lp0")
         
-        #db.upinvent()
+        db.upinvent()
+        #print(proid)
         #print("asd" +pre+ "dsa")
         #db.reset_all()
         #populate_list()
@@ -153,8 +165,6 @@ def resetbox():
         populate_totalw()
     if question == 'no':
         print('Enjoy shopping')
-    
-
 
 
 #Main Window
@@ -189,6 +199,10 @@ button_4 = Button(root, image=photores, relief="raised", bd="3", command=resetbo
 button_4.bind("<Button-1>")
 button_4.place(x=310, y=550)
 
+button_newcust = Button(root, text="New Customer", relief="raised", bd="3", height=2, width=13, font = ('Roboto',10), command=newcust)
+button_newcust.bind("<Button-1>")
+button_newcust.place(x=40, y=400)
+
 """TEXTS"""
 item_text = StringVar()
 itemlabel = Label(root, text='ITEM')
@@ -217,22 +231,22 @@ parts_list.bind('<<ListboxSelect>>', select_item)
 
 # Parts List (Listbox)
 displaytotalp = Listbox(root, relief="raised", height=1, width=10, border=0, font = ('Roboto',14))
-displaytotalp.place(x=280, y=420)
+displaytotalp.place(x=350, y=420)
 displaytotalp.bind('<<ListboxSelect>>', select_item)
 
 totalprice = StringVar()
 totalpricelabel = Label(root, text='Total Price(₱)', font = ('Roboto',13))
-totalpricelabel.place(x=135, y=420)
+totalpricelabel.place(x=225, y=420)
 totalprice_entry = Entry(root, textvariable=totalprice)
 
 # Parts List (Listbox)
 displaytotalw = Listbox(root, relief="raised", height=1, width=10, border=0, font = ('Roboto',14))
-displaytotalw.place(x=280, y=440)
+displaytotalw.place(x=350, y=441)
 displaytotalw.bind('<<ListboxSelect>>', select_item)
 
 totalweight = StringVar()
 totalweightlabel = Label(root, text='Total Weight(g)', font = ('Roboto',13))
-totalweightlabel.place(x=135, y=440)
+totalweightlabel.place(x=225, y=442)
 totalweight_entry = Entry(root, textvariable=totalweight)
 
 # Create scrollbar
