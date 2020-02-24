@@ -26,13 +26,49 @@ class Database:
         self.cur.execute("UPDATE parts SET quantity = 0, price = 0, weight = 0")
         self.conn.commit()
 
-    def getordero(self):
-        self.cur.execute("SELECT id, item, (SELECT orange FROM orders WHERE orderid = 7) FROM parts WHERE id = 1")
+    def getordero(self,orderid1,orderid2,orderid3):
+        self.cur.execute("SELECT id, item, (SELECT orange FROM orders WHERE orderid = ?),\
+        ((SELECT orange FROM orders WHERE orderid = ?)*(SELECT price FROM inventory WHERE id = 1)),\
+        ((SELECT orange FROM orders WHERE orderid = ?)*(SELECT weight FROM inventory WHERE id = 1))\
+         FROM parts WHERE id = 1",(orderid1,orderid2,orderid3,))
         fetch_order = self.cur.fetchall()
         return fetch_order
     
+    def getordera(self,orderid1,orderid2,orderid3):
+        self.cur.execute("SELECT id, item, (SELECT apple FROM orders WHERE orderid = ?),\
+        ((SELECT apple FROM orders WHERE orderid = ?)*(SELECT price FROM inventory WHERE id = 2)),\
+        ((SELECT apple FROM orders WHERE orderid = ?)*(SELECT weight FROM inventory WHERE id = 2))\
+         FROM parts WHERE id = 2",(orderid1,orderid2,orderid3,))
+        fetch_order = self.cur.fetchall()
+        return fetch_order
+
+    def getorderb(self,orderid1,orderid2,orderid3):
+        self.cur.execute("SELECT id, item, (SELECT banana FROM orders WHERE orderid = ?),\
+        ((SELECT banana FROM orders WHERE orderid = ?)*(SELECT price FROM inventory WHERE id = 3)),\
+        ((SELECT banana FROM orders WHERE orderid = ?)*(SELECT weight FROM inventory WHERE id = 3))\
+         FROM parts WHERE id = 3",(orderid1,orderid2,orderid3,))
+        fetch_order = self.cur.fetchall()
+        return fetch_order
+
+    def getordertp(self,orderid1,orderid2,orderid3):
+        self.cur.execute("SELECT SUM(((SELECT orange FROM orders WHERE orderid = ?)*(SELECT price FROM inventory WHERE id = 1))\
+        +((SELECT apple FROM orders WHERE orderid = ?)*(SELECT price FROM inventory WHERE id = 2))\
+        +((SELECT banana FROM orders WHERE orderid = ?)*(SELECT price FROM inventory WHERE id = 3)))"\
+        ,(orderid1,orderid2,orderid3,))
+        fetch_order = self.cur.fetchall()
+        return fetch_order
+
+    def getordertw(self,orderid1,orderid2,orderid3):
+        self.cur.execute("SELECT SUM(((SELECT orange FROM orders WHERE orderid = ?)*(SELECT weight FROM inventory WHERE id = 1))\
+        +((SELECT apple FROM orders WHERE orderid = ?)*(SELECT weight FROM inventory WHERE id = 2))\
+        +((SELECT banana FROM orders WHERE orderid = ?)*(SELECT weight FROM inventory WHERE id = 3)))"\
+        ,(orderid1,orderid2,orderid3,))
+        fetch_order = self.cur.fetchall()
+        return fetch_order
+
     def __del__(self):
         self.conn.close()
+
 
 db = Database(r'C:\Users\Jubel\Desktop\db\jsj.db')  
 

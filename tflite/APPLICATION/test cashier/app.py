@@ -13,37 +13,30 @@ db = Database(r'C:\Users\Jubel\Desktop\db\jsj.db')
 
 # **** Functions ****
 
-def custorder():
-    populate_list()
-    populate_totalp()
-    populate_totalw()
-
-def purorder():
-    db.reset_all()
-    populate_list()
-    populate_totalp()
-    populate_totalw()
-
 def populate_list():
     order_list.delete(0, END)
     for row in db.fetch():
             order_list.insert(END, row)
 
-def populate_totalp():
-    displaytotalp.delete(0, END)
-    for roww in db.display_price():
-            displaytotalp.insert(END, roww)
-
-def populate_totalw():
-    displaytotalw.delete(0, END)
-    for rowww in db.display_weight():
-            displaytotalw.insert(END, rowww)
-
 def populate_order():
     order_list.delete(0, END)
-    for rowww_o in db.getordero():
-            order_list.insert(END, rowww_o)
+    for row_o in db.getordero(orderid_entry.get(),orderid_entry.get(),orderid_entry.get()):
+            order_list.insert(END, row_o)
+    for row_a in db.getordera(orderid_entry.get(),orderid_entry.get(),orderid_entry.get()):
+            order_list.insert(END, row_a)
+    for row_b in db.getorderb(orderid_entry.get(),orderid_entry.get(),orderid_entry.get()):
+            order_list.insert(END, row_b)
 
+def populate_ordertp():
+    displaytotalp.delete(0, END)
+    for row in db.getordertp(orderid_entry.get(),orderid_entry.get(),orderid_entry.get()):
+            displaytotalp.insert(END, row)
+
+def populate_ordertw():
+    displaytotalw.delete(0, END)
+    for row in db.getordertw(orderid_entry.get(),orderid_entry.get(),orderid_entry.get()):
+            displaytotalw.insert(END, row)
+     
 def select_item(event):
     try:
         global selected_item
@@ -59,9 +52,10 @@ def select_item(event):
         pass
     
 def searchorder():
-    db.getordero()
     populate_order()
-
+    populate_ordertp()
+    populate_ordertw()
+  
 
 #Main Window
 root = Tk()
@@ -76,13 +70,13 @@ logophotolabel.place(x=15, y=15, anchor=NW)
 
 # **** Picture button. ADD TO CART. DELETE ITEM. PRINT ALL ITEM ****
 photoadd = PhotoImage(file="ui/addsz.png")
-button_1 = Button(root, image=photoadd, relief="raised", bd="3", command=custorder)
-button_1.bind("<Button-1>", custorder)
-button_1.place(x=50, y=550)
+#button_1 = Button(root, image=photoadd, relief="raised", bd="3", command=custorder)
+#button_1.bind("<Button-1>", custorder)
+#button_1.place(x=50, y=550)
 
 newcust_text = StringVar()
-newcustlabel = Label(root, text='NEW CUSTOMER', font = ('Roboto',13))
-newcustlabel.place(x=50, y=525)
+#newcustlabel = Label(root, text='NEW CUSTOMER', font = ('Roboto',13))
+#newcustlabel.place(x=50, y=525)
 
 """TEXTS"""
 
