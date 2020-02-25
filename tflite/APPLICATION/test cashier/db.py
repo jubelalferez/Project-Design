@@ -26,27 +26,27 @@ class Database:
         self.cur.execute("UPDATE parts SET quantity = 0, price = 0, weight = 0")
         self.conn.commit()
 
-    def getordero(self,orderid1,orderid2,orderid3):
-        self.cur.execute("SELECT id, item, (SELECT orange FROM orders WHERE orderid = ?),\
-        ((SELECT orange FROM orders WHERE orderid = ?)*(SELECT price FROM inventory WHERE id = 1)),\
-        ((SELECT orange FROM orders WHERE orderid = ?)*(SELECT weight FROM inventory WHERE id = 1))\
-         FROM parts WHERE id = 1",(orderid1,orderid2,orderid3,))
+    def getordero(self,orderid1,orderid2,orderid3,orderid4):
+        self.cur.execute("SELECT id, item, (SELECT orange FROM orders WHERE orderid = ? AND orange > 0),\
+        ((SELECT orange FROM orders WHERE orderid = ? AND orange > 0)*(SELECT price FROM inventory WHERE id = 1)),\
+        ((SELECT orange FROM orders WHERE orderid = ? AND orange > 0)*(SELECT weight FROM inventory WHERE id = 1))\
+         FROM parts WHERE id = 1 AND (SELECT orange FROM orders where orderid = ? AND orange > 0)",(orderid1,orderid2,orderid3,orderid4,))
         fetch_order = self.cur.fetchall()
         return fetch_order
     
-    def getordera(self,orderid1,orderid2,orderid3):
-        self.cur.execute("SELECT id, item, (SELECT apple FROM orders WHERE orderid = ?),\
-        ((SELECT apple FROM orders WHERE orderid = ?)*(SELECT price FROM inventory WHERE id = 2)),\
-        ((SELECT apple FROM orders WHERE orderid = ?)*(SELECT weight FROM inventory WHERE id = 2))\
-         FROM parts WHERE id = 2",(orderid1,orderid2,orderid3,))
+    def getordera(self,orderid1,orderid2,orderid3,orderid4):
+        self.cur.execute("SELECT id, item, (SELECT apple FROM orders WHERE orderid = ? AND apple > 0),\
+        ((SELECT apple FROM orders WHERE orderid = ? AND apple > 0)*(SELECT price FROM inventory WHERE id = 2)),\
+        ((SELECT apple FROM orders WHERE orderid = ? AND apple > 0)*(SELECT weight FROM inventory WHERE id = 2))\
+         FROM parts WHERE id = 2 AND (SELECT apple FROM orders where orderid = ? AND apple > 0)",(orderid1,orderid2,orderid3,orderid4,))
         fetch_order = self.cur.fetchall()
         return fetch_order
 
-    def getorderb(self,orderid1,orderid2,orderid3):
-        self.cur.execute("SELECT id, item, (SELECT banana FROM orders WHERE orderid = ?),\
-        ((SELECT banana FROM orders WHERE orderid = ?)*(SELECT price FROM inventory WHERE id = 3)),\
-        ((SELECT banana FROM orders WHERE orderid = ?)*(SELECT weight FROM inventory WHERE id = 3))\
-         FROM parts WHERE id = 3",(orderid1,orderid2,orderid3,))
+    def getorderb(self,orderid1,orderid2,orderid3,orderid4):
+        self.cur.execute("SELECT id, item, (SELECT banana FROM orders WHERE orderid = ? AND banana > 0),\
+        ((SELECT banana FROM orders WHERE orderid = ? AND banana > 0)*(SELECT price FROM inventory WHERE id = 3)),\
+        ((SELECT banana FROM orders WHERE orderid = ? AND banana > 0)*(SELECT weight FROM inventory WHERE id = 3))\
+         FROM parts WHERE id = 3 AND (SELECT banana FROM orders where orderid = ? AND banana > 0)",(orderid1,orderid2,orderid3,orderid4,))
         fetch_order = self.cur.fetchall()
         return fetch_order
 

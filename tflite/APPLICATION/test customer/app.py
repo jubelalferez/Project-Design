@@ -13,7 +13,7 @@ db = Database(r'C:\Users\Jubel\Desktop\db\jsj.db')
 
 
 #Initialize
-db.addcustomer("0", "0" , "0")
+db.addcustomer("0", "0", "0")
 
 
 # **** Functions ****

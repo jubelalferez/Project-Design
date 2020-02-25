@@ -20,11 +20,11 @@ def populate_list():
 
 def populate_order():
     order_list.delete(0, END)
-    for row_o in db.getordero(orderid_entry.get(),orderid_entry.get(),orderid_entry.get()):
+    for row_o in db.getordero(orderid_entry.get(),orderid_entry.get(),orderid_entry.get(),orderid_entry.get()):
             order_list.insert(END, row_o)
-    for row_a in db.getordera(orderid_entry.get(),orderid_entry.get(),orderid_entry.get()):
+    for row_a in db.getordera(orderid_entry.get(),orderid_entry.get(),orderid_entry.get(),orderid_entry.get()):
             order_list.insert(END, row_a)
-    for row_b in db.getorderb(orderid_entry.get(),orderid_entry.get(),orderid_entry.get()):
+    for row_b in db.getorderb(orderid_entry.get(),orderid_entry.get(),orderid_entry.get(),orderid_entry.get()):
             order_list.insert(END, row_b)
 
 def populate_ordertp():
