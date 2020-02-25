@@ -19,7 +19,6 @@ db.addcustomer("0", "0", "0")
 # **** Functions ****
 
 def addorange():
-
     db.updateorange()
     populate_list()
     populate_totalp()
@@ -40,10 +39,9 @@ def addbanana():
 def addtocart():
     top = Toplevel()
     top.title("Products")
-    top.geometry("300x300+730+280")
+    top.geometry("300x300+730+280") #Window size
 
     #Orange
-    #photo_orange = PhotoImage(file="ui/Orange.png")
     button_orange = Button(top, text="Orange", relief="raised", bd="3", height=2, width=4, command=addorange)
     button_orange.bind("<Button-1>")
     button_orange.place(x=15, y=15)
@@ -58,6 +56,7 @@ def addtocart():
     button_banana.bind("<Button-1>")
     button_banana.place(x=155, y=15)
 
+    #Close button
     button_close = Button(top, text="Close\nWindow", relief="raised", bd="3", height=2, width=5, command=top.destroy)
     button_close.bind("<Button-1>")
     button_close.place(x=125, y=230)
@@ -70,7 +69,6 @@ def newcust():
     populate_list()
     populate_totalp()
     populate_totalw()
-
 
 def checkout():
     tkinter.messagebox.showinfo('JSJ Marketing by Group 10',
@@ -104,8 +102,8 @@ def checkout():
         os.system("sudo echo -e '" +proo+ "' > /dev/usb/lp0")
         os.system("sudo echo -e '" +praa+ "' > /dev/usb/lp0")
         os.system("sudo echo -e '" +prbb+ "\n' > /dev/usb/lp0")
-        os.system("sudo echo -e 'Total Price(P)" +prpp+ "' > /dev/usb/lp0")
-        os.system("sudo echo -e 'Total Weight(g)" +prww+ "\n\n' > /dev/usb/lp0")
+        os.system("sudo echo -e 'Total Price(P): " +prpp+ "' > /dev/usb/lp0")
+        os.system("sudo echo -e 'Total Weight(g): " +prww+ "\n\n' > /dev/usb/lp0")
         os.system("sudo echo -e 'Order ID: " +proid+ "\n' > /dev/usb/lp0")
         os.system("sudo echo -e 'Thank you for Shopping! \nJSJ Marketing \n\n\n' > /dev/usb/lp0")
         
@@ -171,9 +169,7 @@ def resetbox():
 root = Tk()
 root.title('JSJ Marketing by Group 10')
 
-# **** Calling an image from the project file ****
-# **** The simplest form, using PhotoImage() class ****
-# **** You can only do this if you copy a file then paste it inside the project ****
+#Logo
 logoPhoto = PhotoImage(file="ui/logoz.png")
 logophotolabel = Label(root, image=logoPhoto)
 logophotolabel.place(x=15, y=15, anchor=NW)
@@ -199,6 +195,7 @@ button_4 = Button(root, image=photores, relief="raised", bd="3", command=resetbo
 button_4.bind("<Button-1>")
 button_4.place(x=310, y=550)
 
+#New Customer Button
 button_newcust = Button(root, text="New Customer", relief="raised", bd="3", height=2, width=13, font = ('Roboto',10), command=newcust)
 button_newcust.bind("<Button-1>")
 button_newcust.place(x=40, y=400)
@@ -224,12 +221,12 @@ weightlabel = Label(root, text='WEIGHT(g)')
 weightlabel.place(x=310, y=120)
 weight_entry = Entry(root, textvariable=weight_text)
 
-# Parts List (Listbox)
+#Parts List (Listbox)
 parts_list = Listbox(root, relief="raised", height=5, width=20, border=0, font = ('Roboto',30))
 parts_list.grid(padx=40, pady=138, columnspan=3, rowspan=6)  #columnspan=3, rowspan=6, pady=10, padx=20)
 parts_list.bind('<<ListboxSelect>>', select_item)
 
-# Parts List (Listbox)
+#Total Price (Listbox)
 displaytotalp = Listbox(root, relief="raised", height=1, width=10, border=0, font = ('Roboto',14))
 displaytotalp.place(x=350, y=420)
 displaytotalp.bind('<<ListboxSelect>>', select_item)
@@ -239,7 +236,7 @@ totalpricelabel = Label(root, text='Total Price(₱)', font = ('Roboto',13))
 totalpricelabel.place(x=225, y=420)
 totalprice_entry = Entry(root, textvariable=totalprice)
 
-# Parts List (Listbox)
+#Total Weight (Listbox)
 displaytotalw = Listbox(root, relief="raised", height=1, width=10, border=0, font = ('Roboto',14))
 displaytotalw.place(x=350, y=441)
 displaytotalw.bind('<<ListboxSelect>>', select_item)
@@ -265,5 +262,5 @@ populate_totalp()
 populate_totalw()
 
 
-root.geometry('560x680+600+3')
+root.geometry('560x680+600+3') #Window size
 root.mainloop()

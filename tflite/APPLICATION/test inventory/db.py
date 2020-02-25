@@ -7,7 +7,7 @@ class Database:
         self.conn.commit()
 
     def fetch(self):
-        self.cur.execute("SELECT id, item, quantity, price, weight FROM inventory")
+        self.cur.execute("SELECT * FROM inventory")
         rows = self.cur.fetchall()
         return rows     
 

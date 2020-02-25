@@ -12,7 +12,6 @@ import functools
 db = Database(r'C:\Users\Jubel\Desktop\db\jsj.db') 
 
 # **** Functions ****
-
 def populate_list():
     order_list.delete(0, END)
     for row in db.fetch():
@@ -61,20 +60,18 @@ def searchorder():
 root = Tk()
 root.title('JSJ Marketing by Group 10 - CASHIER')
 
-# **** Calling an image from the project file ****
-# **** The simplest form, using PhotoImage() class ****
-# **** You can only do this if you copy a file then paste it inside the project ****
+#Logo
 logoPhoto = PhotoImage(file="ui/logoz.png")
 logophotolabel = Label(root, image=logoPhoto)
 logophotolabel.place(x=15, y=15, anchor=NW)
 
 # **** Picture button. ADD TO CART. DELETE ITEM. PRINT ALL ITEM ****
-photoadd = PhotoImage(file="ui/addsz.png")
+#photoadd = PhotoImage(file="ui/addsz.png")
 #button_1 = Button(root, image=photoadd, relief="raised", bd="3", command=custorder)
 #button_1.bind("<Button-1>", custorder)
 #button_1.place(x=50, y=550)
 
-newcust_text = StringVar()
+#newcust_text = StringVar()
 #newcustlabel = Label(root, text='NEW CUSTOMER', font = ('Roboto',13))
 #newcustlabel.place(x=50, y=525)
 
@@ -111,12 +108,12 @@ weightlabel = Label(root, text='WEIGHT(g)')
 weightlabel.place(x=310, y=120)
 weight_entry = Entry(root, textvariable=weight_text)
 
-# Parts List (Listbox)
+#Parts List (Listbox)
 order_list = Listbox(root, relief="raised", height=5, width=20, border=0, font = ('Roboto',30))
 order_list.grid(padx=40, pady=138, columnspan=3, rowspan=6)  #columnspan=3, rowspan=6, pady=10, padx=20)
 order_list.bind('<<ListboxSelect>>', select_item)
 
-# Parts List (Listbox)
+#Total Price (Listbox)
 displaytotalp = Listbox(root, relief="raised", height=1, width=10, border=0, font = ('Roboto',14))
 displaytotalp.place(x=280, y=420)
 displaytotalp.bind('<<ListboxSelect>>', select_item)
@@ -126,7 +123,7 @@ totalpricelabel = Label(root, text='Total Price(₱)', font = ('Roboto',13))
 totalpricelabel.place(x=145, y=420)
 totalprice_entry = Entry(root, textvariable=totalprice)
 
-# Parts List (Listbox)
+#Total Weight (Listbox)
 displaytotalw = Listbox(root, relief="raised", height=1, width=10, border=0, font = ('Roboto',14))
 displaytotalw.place(x=280, y=445)
 displaytotalw.bind('<<ListboxSelect>>', select_item)
@@ -147,5 +144,5 @@ scrollbar.configure(command=order_list.yview)
 order_list.bind('<<ListboxSelect>>', select_item)
 
 
-root.geometry('560x680+600+3')
+root.geometry('560x680+600+3') #Window size
 root.mainloop()
