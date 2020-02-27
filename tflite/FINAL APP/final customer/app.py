@@ -229,7 +229,7 @@ parts_list.bind('<<ListboxSelect>>', select_item)
 
 #Total Price (Listbox)
 displaytotalp = Listbox(root, relief="raised", height=1, width=10, border=0, font = ('Roboto',14))
-displaytotalp.place(x=350, y=420)
+displaytotalp.place(x=365, y=420)
 displaytotalp.bind('<<ListboxSelect>>', select_item)
 
 totalprice = StringVar()
@@ -239,7 +239,7 @@ totalprice_entry = Entry(root, textvariable=totalprice)
 
 #Total Weight (Listbox)
 displaytotalw = Listbox(root, relief="raised", height=1, width=10, border=0, font = ('Roboto',14))
-displaytotalw.place(x=350, y=441)
+displaytotalw.place(x=365, y=441)
 displaytotalw.bind('<<ListboxSelect>>', select_item)
 
 totalweight = StringVar()
