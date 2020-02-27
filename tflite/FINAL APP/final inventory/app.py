@@ -37,15 +37,13 @@ def select_item(event):
 root = Tk()
 root.title('JSJ Marketing by Group 10 INVENTORY')
 
-# **** Calling an image from the project file ****
-# **** The simplest form, using PhotoImage() class ****
-# **** You can only do this if you copy a file then paste it inside the project ****
+#Logo
 logoPhoto = PhotoImage(file="ui/logoz.png")
 logophotolabel = Label(root, image=logoPhoto)
 logophotolabel.place(x=15, y=15, anchor=NW)
 
 # **** Picture button. ADD TO CART. DELETE ITEM. PRINT ALL ITEM ****
-photoref = PhotoImage(file="ui/addsz.png")
+photoref = PhotoImage(file="ui/refresh.png")
 button_1 = Button(root, image=photoref, relief="raised", bd="3", command=populate_list)
 button_1.bind("<Button-1>", populate_list)
 button_1.place(x=240, y=550)
@@ -74,7 +72,7 @@ weightlabel = Label(root, text='WEIGHT(g)')
 weightlabel.place(x=310, y=120)
 weight_entry = Entry(root, textvariable=weight_text)
 
-# Parts List (Listbox)
+#Parts List (Listbox)
 parts_list = Listbox(root, relief="raised", height=5, width=20, border=0, font = ('Roboto',30))
 parts_list.grid(padx=40, pady=138, columnspan=3, rowspan=6)  #columnspan=3, rowspan=6, pady=10, padx=20)
 parts_list.bind('<<ListboxSelect>>', select_item)
@@ -91,5 +89,5 @@ parts_list.bind('<<ListboxSelect>>', select_item)
 
 populate_list()
 
-root.geometry('560x680+600+3')
+root.geometry('560x680+600+3') #Window size
 root.mainloop()
