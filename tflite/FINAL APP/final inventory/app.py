@@ -35,7 +35,7 @@ def select_item(event):
 
 #Main Window
 root = Tk()
-root.title('JSJ Marketing by Group 10 INVENTORY')
+root.title('JSJ Marketing by Group 10 - INVENTORY')
 
 #Logo
 logoPhoto = PhotoImage(file="ui/logoz.png")
