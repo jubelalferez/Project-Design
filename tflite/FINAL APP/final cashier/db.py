@@ -78,7 +78,7 @@ class Database:
         self.conn.close()
 
 
-db = Database(r'C:\Users\Jubel\Desktop\db\jsj.db')  
+db = Database(r'\\raspberrypi\share\jsj.db')  
 
 
 #db.insert("APPLE", "1", "10")
