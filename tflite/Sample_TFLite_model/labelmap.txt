@@ -50,10 +50,10 @@ fork
 knife
 spoon
 bowl
-banana P8 w=170g
-apple P10 w=400g
+banana P8 w=120g
+apple P10 w=145g
 sandwich
-orange P10 w=200g
+orange P10 w=135g
 broccoli
 carrot
 hot dog
